@@ -1,98 +1,41 @@
 
-function createTable(size){
-    var i = 0;
-    var newArray;
-    newArray = Array(size);
-    while (i < size)
-    {
-        newArray[i] = Math.floor(Math.random() * 10);
-        i++;
-    }
-    return (newArray);
+function treat_data(newArray) {
+    var copArray = newArray.slice();
+    var len = newArray.length;
+    Start1 = new Date();
+    tri(newArray, len);
+    End1 = new Date();
+
+
+    var len = copArray.length - 1;
+    Start2 = new Date();
+    quicksort(copArray, 0, len);
+    End2 = new Date();
+
+    alert('For a naive tri : found in ' + (End1-Start1) + " ms d'execution javascript \n" + newArray);
+    alert('For a quicksort : found in ' + (End2-Start2) + " ms d'execution javascript \n" + copArray); 
 }
 
-function swap(tab, i, j)
-{
-    var tmp;
+function data_set(set) {
+    var tab;
 
-    tmp = tab[i];
-    tab[i] = tab[j];
-    tab[j] = tmp;
+    set == 0 ? tab = createTable(10000) : tab = createTable(50000);
+    alert('The following table will be sorted:\n ' + tab);
+    treat_data(tab);
 }
 
-function tri(tab, length)
-{
-    var i = 0;
-    var j;
-    var min;
-    while (i < length - 1)
-    {
-        min = i;
-        j = i + 1;
-        while (j < length)
-        {
-            if (tab[j] < tab[min])
-                min = j;
-            j++;
+function custom_table() {
+    var valid = false;
+    var ar;
+    while (valid == false)  {
+        table = prompt("Hello, Please type a table of integers separated by ',' ");
+        if (table != null && table.trim().length > 0)  {
+            valid = true;
         }
-        if (min != i)
-            swap(tab, i, min);
-        i++;
-    }
-}
-
-
-function partition(tab, first, last, pivot)
-{
-    var i = 0;
-    var j = 0;
-    swap(tab, last, pivot);
-    while (i < last)
-    {
-        if (tab[i] <= tab[last])
-        {
-            swap(tab, i, j);
-            j++; 
+        if (valid)  {
+            alert('The following table will be sorted:\n ' + table);
+            ar = table.split(",");
+            treat_data(ar);
         }
-        i++;
-    }
-    swap(tab, last, j);
-    return (j);
-}
-
-
-function choicePivot(first, last){
-    return Math.floor(Math.random() * (last - first + 1)) + first;
-}
-
-
-function quicksort(tab, first, last)
-{
-    var pivot;
-
-    if (first < last)
-    {
-        pivot = choicePivot(first, last);
-        pivot = partition(tab, first, last, pivot);
-        quicksort(tab, first, pivot - 1);
-        quicksort(tab, pivot + 1, last);
     }
 }
-
-
-var size = prompt("Hello, give me a size of table", "Your number here");
-alert('The table will be generate randomly with a size of ' + size);
-var newArray = createTable(size);
-
-var copArray = newArray;
-Start = new Date();
-var len = newArray.length;
-tri(newArray, len);
-End = new Date();
-alert('For a naive tri : found in ' + (End-Start) + " ms d'execution javascript \n" + newArray);
-
-var len = copArray.length;
-Start = new Date();
-quicksort(copArray, 0, len);
-End = new Date();
-alert('For a quicksort : found in ' + (End-Start) + " ms d'execution javascript\n" + copArray);
