@@ -7,7 +7,7 @@ function partition(tab, first, last, pivot)
     var i = 0;
     var j = 0;
     swap(tab, last, pivot);
-    while (i < last - 1)
+    while (i < last)
     {
         if (tab[i] <= tab[last])
         {

@@ -30,7 +30,6 @@ const url = "https://www.flatlooker.com/appartements.json?page=";
                 document.getElementById('rent' + i).innerHTML = data[i]['rent'];
                 document.getElementById('isrented' + i).innerHTML = data[i]['isrented'];
                 document.getElementById('h_360' + i).innerHTML = data[i]['has_360'];
-                console.log(data[i]['photo_360']);
                 document.getElementById('photo_360' + i).src = data[i]['photo_360'];
                 i++;
             }
